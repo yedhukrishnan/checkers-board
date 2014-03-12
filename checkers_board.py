@@ -23,11 +23,13 @@ class CheckersBoard:
     def set_pieces_on_board_for_a_new_game(self):
         # We cannot play on an empty wooden board. Let's set the pieces on our board.
         # We use our initial positions list for arranging black and white pieces.
-        for position in self.initial_white_positions:
-            self.set_piece_on_board(position, self.white)
-
-        for position in self.initial_black_positions:
-            self.set_piece_on_board(position, self.black)
+        self.set_pieces_on_board(self.initial_white_positions, self.white)
+        self.set_pieces_on_board(self.initial_black_positions, self.black)
+        
+    def set_pieces_on_board(self, positions, piece):
+        # Wrapper method. It takes a list of positions and piece to place on the positions and iterate through it
+        for position in positions:
+            self.set_piece_on_board(position, piece)
 
     def set_piece_on_board(self, position, piece):
         [row, column] = self.position_parser(position);

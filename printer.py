@@ -1,4 +1,5 @@
-#Other Methods
+# Temporary method for displaying wooden board on screen
+# Refactoring pending
 
 # Print the board on terminal
 def print_board(wooden_board):

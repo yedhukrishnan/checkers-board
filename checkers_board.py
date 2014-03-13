@@ -1,14 +1,10 @@
 class CheckersBoard:
     
-    # Warriors on the battlefield: our pieces
-    white = 'w'
-    black = 'b'
-
     wooden_board = []
     initial_white_positions = ['a1', 'c1', 'e1', 'g1', 'b2', 'd2', 'f2', 'h2', 'a3', 'c3', 'e3', 'g3']
     initial_black_positions = ['b6', 'd6', 'f6', 'h6', 'a7', 'c7', 'e7', 'g7', 'b8', 'd8', 'f8', 'h8']
 
-    def __init__(self):
+    def __init__(self, piece):
         # Initialize empty wooden board. Yes, we prefer you to play on wooden board! Classic look!! :-)
         # Representation of our board as a list of lists (2D array type). Still thinking of better a representation.
         self.wooden_board  = [[' ',' ',' ',' ',' ',' ',' ',' '],
@@ -19,12 +15,13 @@ class CheckersBoard:
                               [' ',' ',' ',' ',' ',' ',' ',' '],
                               [' ',' ',' ',' ',' ',' ',' ',' '],
                               [' ',' ',' ',' ',' ',' ',' ',' ']]
+        self.piece = piece
 
     def set_pieces_on_board_for_a_new_game(self):
         # We cannot play on an empty wooden board. Let's set the pieces on our board.
         # We use our initial positions list for arranging black and white pieces.
-        self.set_pieces_on_board(self.initial_white_positions, self.white)
-        self.set_pieces_on_board(self.initial_black_positions, self.black)
+        self.set_pieces_on_board(self.initial_white_positions, self.piece['white'])
+        self.set_pieces_on_board(self.initial_black_positions, self.piece['black'])
         
     def set_pieces_on_board(self, positions, piece):
         # Wrapper method. It takes a list of positions and piece to place on the positions and iterate through it

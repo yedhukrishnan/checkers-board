@@ -1,8 +1,6 @@
 class CheckersBoard:
     
     wooden_board = []
-    initial_white_positions = ['a1', 'c1', 'e1', 'g1', 'b2', 'd2', 'f2', 'h2', 'a3', 'c3', 'e3', 'g3']
-    initial_black_positions = ['b6', 'd6', 'f6', 'h6', 'a7', 'c7', 'e7', 'g7', 'b8', 'd8', 'f8', 'h8']
 
     def __init__(self, piece):
         # Initialize empty wooden board. Yes, we prefer you to play on wooden board! Classic look!! :-)

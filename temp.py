@@ -5,7 +5,7 @@ from printer import *
 from assets import *
 from helpers import *
 from movement import *
-
+from move_list import *
 
 # Print empty wooden board
 b = CheckersBoard(piece)
@@ -25,15 +25,24 @@ init_pos = position_parser('c3')
 fin_pos = position_parser('b4')
 
 # Make and check a simple move
-m.make_simple_move(init_pos, fin_pos)
-print_board(b.wooden_board)
+# m.make_simple_move(init_pos, fin_pos)
+# print_board(b.wooden_board)
 
 
 # Make and check a capturing nove
-b.set_piece([4, 5], 'b')
-print_board(b.wooden_board)
-m.make_capture_move([5, 4], [3, 6])
+# b.set_piece([4, 5], 'b')
+# print_board(b.wooden_board)
+# m.make_capture_move([5, 4], [3, 6])
+
 print_board(b.wooden_board)
 
 
-# Yet to decide where to place this method
+readable_position([0,0])
+readable_position([7,7])
+readable_position([0,7])
+readable_position([7,0])
+
+ml = MoveList(b, piece)
+
+print ml.get_move_list('c3')
+print ml.get_move_list('h6')

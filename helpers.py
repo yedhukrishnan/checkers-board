@@ -7,3 +7,8 @@ def position_parser(position):
     row    = 7 - (ord(position[1]) - ord('1'))
     return [row, column]
 
+def readable_position(position):
+    [row, column] = position
+    string_row = str(8 - row)
+    string_column = chr(column + 97)
+    return string_column + string_row

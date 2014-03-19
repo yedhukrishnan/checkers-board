@@ -36,3 +36,4 @@ class CheckersBoard:
 
     def get_wooden_board(self):
         return self.wooden_board
+        return 0 <= value <= 8

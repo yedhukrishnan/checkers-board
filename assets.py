@@ -17,3 +17,6 @@ initial_white_positions = [[7, 0], [7, 2], [7, 4], [7, 6], [6, 1], [6, 3], [6, 5
 
 # initial_black_positions = ['b6', 'd6', 'f6', 'h6', 'a7', 'c7', 'e7', 'g7', 'b8', 'd8', 'f8', 'h8']
 initial_black_positions = [[2, 1], [2, 3], [2, 5], [2, 7], [1, 0], [1, 2], [1, 4], [1, 6], [0, 1], [0, 3], [0, 5], [0, 7]]
+
+# Offset position to add for pieces [especially to get neighbour cells]
+move_offset = { piece['black']: 1, piece['white']: -1 }

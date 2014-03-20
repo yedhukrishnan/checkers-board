@@ -5,14 +5,14 @@ class CheckersBoard:
     def __init__(self, piece):
         # Initialize empty wooden board. Yes, we prefer you to play on wooden board! Classic look!! :-)
         # Representation of our board as a list of lists (2D array type). Still thinking of better a representation.
-        self.wooden_board  = [[' ',' ',' ',' ',' ',' ',' ',' '],
-                              [' ',' ',' ',' ',' ',' ',' ',' '],
-                              [' ',' ',' ',' ',' ',' ',' ',' '],
-                              [' ',' ',' ',' ',' ',' ',' ',' '],
-                              [' ',' ',' ',' ',' ',' ',' ',' '],
-                              [' ',' ',' ',' ',' ',' ',' ',' '],
-                              [' ',' ',' ',' ',' ',' ',' ',' '],
-                              [' ',' ',' ',' ',' ',' ',' ',' ']]
+        self.wooden_board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
         self.piece = piece
 
     def set_pieces_on_board_for_a_new_game(self, initial_white_positions, initial_black_positions):

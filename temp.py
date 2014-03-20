@@ -46,3 +46,10 @@ ml = MoveList(b, piece)
 
 print ml.get_move_list('c3')
 print ml.get_move_list('h6')
+
+b.set_piece([5,2], piece['empty'])
+b.set_piece([5,4], piece['empty'])
+b.set_piece([4,3], piece['black_king'])
+
+print ['d4-c3', 'd4-e3', 'd4-c5', 'd4-e5']
+print ml.get_move_list('d4')

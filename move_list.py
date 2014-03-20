@@ -21,17 +21,20 @@ class MoveList:
         piece = self.checkers_board.get_piece(position)
         self.neighbours = []
 
-        self.add_neighbour([row + move_offset[piece], column - 1])
-        self.add_neighbour([row + move_offset[piece], column + 1])
+        # Get neighbours by adding offset. King pieces have two offsets [1, -1]
+        for offset in move_offset[piece]:
+            self.add_neighbour([row + offset, column + 1])
+            self.add_neighbour([row + offset, column - 1])
         
         return self.neighbours
-
-    def is_valid(self, position):
-        [row, column] = position
-        return 0 <= row <= 7 and 0 <= column <= 7
 
     def add_neighbour(self, neighbour):
         if self.is_valid(neighbour):
             self.neighbours.append(neighbour)
-        
 
+    def is_valid(self, position):
+        [row, column] = position
+        return 0 <= row <= 7 and 0 <= column <= 7
+        
+#    def is_king_piece(self, piece):
+#        return piece == self.piece['white_king'] or piece == self.piece['black_king']

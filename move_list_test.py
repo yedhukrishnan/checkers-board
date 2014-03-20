@@ -33,12 +33,16 @@ class MoveListTest(unittest.TestCase):
         list_of_moves = self.move_list.get_move_list('a3')
         self.assertSetEqual(set(expected_list_of_moves), set(list_of_moves))
 
+    def test_shouldReturnNonCapturingMoveListForAKingPieceOnBoard(self):
+        self.checkers_board.set_piece([5,2], piece['empty'])
+        self.checkers_board.set_piece([5,4], piece['empty'])
+        self.checkers_board.set_piece([4,3], piece['black_king'])
+        expected_list_of_moves = ['d4-c3', 'd4-e3', 'd4-c5', 'd4-e5']
+        list_of_moves = self.move_list.get_move_list('d4')
+        self.assertSetEqual(set(expected_list_of_moves), set(list_of_moves))
 
-#    def test_shouldReturnNonCapturingMoveListForAKingPieceOnBoard(self):
-#        self.checkers_board.set_piece([5,2], piece['empty'])
-#        self.checkers_board.set_piece([5,4], piece['empty'])
-#        self.checkers_board.set_piece([4,3], piece['black_king'])
-#
-#        expected_list_of_moves = ['d4-c3', 'd4-e3', 'd4-c5', 'd4-e5']
-#        list_of_moves = self.move_list.get_move_list('d4')
-#        self.assertTrue(set(expected_list_of_moves) == set(list_of_moves))
+    def test_shouldReturnEmptyMoveListForAKingPieceOnBoard(self):
+        self.checkers_board.set_piece([7,4], piece['white_king'])
+        expected_list_of_moves = []
+        list_of_moves = self.move_list.get_move_list('e1')
+        self.assertSetEqual(set(expected_list_of_moves), set(list_of_moves))

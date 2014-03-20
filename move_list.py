@@ -16,6 +16,13 @@ class MoveList:
                 move_list.append(move)
         return move_list
 
+    def get_capturing_move_list(self, position):
+        self.capture_move_list = []
+        [row, column] = position_parser(position)
+        piece = self.checkers_board.get_piece([row, column])
+        self.get_captures(position, [row, column], piece)
+        return self.capture_move_list
+
     def get_movable_neighbour_cells(self, position):
         [row, column] = position
         piece = self.checkers_board.get_piece(position)
@@ -36,5 +43,42 @@ class MoveList:
         [row, column] = position
         return 0 <= row <= 7 and 0 <= column <= 7
         
-#    def is_king_piece(self, piece):
-#        return piece == self.piece['white_king'] or piece == self.piece['black_king']
+    # TODO: Refactoring
+    def get_captures(self, move, position, piece):
+        [row, column] = position
+        capture_neighbours = self.get_capture_neighbour_cells(position, piece)
+        
+        print move
+        print capture_neighbours
+
+        for neighbour in capture_neighbours:
+            move += "x" + readable_position(neighbour)
+            call_back = self.get_captures(move, neighbour, piece)
+            if not call_back:
+                self.capture_move_list.append(move)
+
+        if capture_neighbours == []:
+            self.capture_move_list.append(move)
+        
+        return capture_neighbours != []
+
+    def get_capture_neighbour_cells(self, position, piece):
+        [row, column] = position
+        self.capture_neighbours = []
+
+        for offset in move_offset[piece]:
+            self.add_capture_neighbour([row, column], [row + offset, column + 1], [row + 2 * offset, column + 2], piece)
+            self.add_capture_neighbour([row, column], [row + offset, column - 1], [row + 2 * offset, column - 2], piece)
+        
+        return self.capture_neighbours
+
+    # TODO: Refactoring
+    def add_capture_neighbour(self, initial_position, opponent_position, final_position, piece):
+        if self.is_valid(initial_position) and self.is_valid(opponent_position) and self.is_valid(final_position):
+            opponent_piece = self.checkers_board.get_piece(opponent_position)
+            if self.is_opponent(piece, opponent_piece):
+                if self.checkers_board.get_piece(final_position) == self.piece['empty']:
+                    self.capture_neighbours.append(final_position)
+
+    def is_opponent(self, piece, opponent_piece):
+        return (piece in piece_set_one and opponent_piece in piece_set_two) or (piece in piece_set_two and opponent_piece in piece_set_one) 

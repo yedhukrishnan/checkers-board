@@ -20,3 +20,7 @@ initial_black_positions = [[2, 1], [2, 3], [2, 5], [2, 7], [1, 0], [1, 2], [1, 4
 
 # Offset position to add for pieces [especially to get neighbour cells]
 move_offset = { piece['black']: [1], piece['white']: [-1], piece['black_king']: [1, -1], piece['white_king']: [-1, 1] }
+
+
+piece_set_one = [piece['white'], piece['white_king']]
+piece_set_two = [piece['black'], piece['black_king']]

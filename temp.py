@@ -37,19 +37,24 @@ fin_pos = position_parser('b4')
 print_board(b.wooden_board)
 
 
-readable_position([0,0])
-readable_position([7,7])
-readable_position([0,7])
-readable_position([7,0])
+#readable_position([0,0])
+#readable_position([7,7])
+#readable_position([0,7])
+#readable_position([7,0])
 
 ml = MoveList(b, piece)
 
-print ml.get_move_list('c3')
-print ml.get_move_list('h6')
+#print ml.get_move_list('c3')
+#print ml.get_move_list('h6')
 
-b.set_piece([5,2], piece['empty'])
-b.set_piece([5,4], piece['empty'])
-b.set_piece([4,3], piece['black_king'])
+#b.set_piece([5,2], piece['empty'])
+#b.set_piece([5,4], piece['empty'])
+#b.set_piece([4,3], piece['black_king'])
 
-print ['d4-c3', 'd4-e3', 'd4-c5', 'd4-e5']
-print ml.get_move_list('d4')
+#print ['d4-c3', 'd4-e3', 'd4-c5', 'd4-e5']
+#print ml.get_move_list('d4')
+
+b.set_piece(position_parser('d4'), piece['black'])
+b.set_piece(position_parser('a7'), piece['empty'])
+print_board(b.wooden_board)
+print ml.get_capturing_move_list('e3')

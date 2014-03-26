@@ -43,25 +43,17 @@ class MoveList:
         [row, column] = position
         return 0 <= row <= 7 and 0 <= column <= 7
         
-    # TODO: Refactoring
     def get_captures(self, move, position, piece):
         [row, column] = position
         capture_neighbours = self.get_capture_neighbour_cells(position, piece)
         
-        print move
-        print capture_neighbours
-
         for neighbour in capture_neighbours:
             move += "x" + readable_position(neighbour)
-            call_back = self.get_captures(move, neighbour, piece)
-            if not call_back:
-                self.capture_move_list.append(move)
+            self.get_captures(move, neighbour, piece)
 
         if capture_neighbours == []:
             self.capture_move_list.append(move)
-        
-        return capture_neighbours != []
-
+                
     def get_capture_neighbour_cells(self, position, piece):
         [row, column] = position
         self.capture_neighbours = []

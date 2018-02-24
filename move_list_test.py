@@ -11,7 +11,7 @@ class MoveListTest(unittest.TestCase):
         self.checkers_board = CheckersBoard(piece)
         self.checkers_board.set_pieces_on_board_for_a_new_game(initial_white_positions, initial_black_positions)
         self.movement = Movement(self.checkers_board, piece)
-        self.move_list = MoveList(self.checkers_board, piece)
+        self.move_list = MoveListGenerator(self.checkers_board, piece)
         
     def test_shouldReturnNonCapturingMoveListForAWhitePieceOnBoard(self):
         expected_list_of_moves = ['c3-b4', 'c3-d4']

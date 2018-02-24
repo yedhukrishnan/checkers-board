@@ -1,18 +1,28 @@
 # Movement class. Takes care of validation of all the movements (Beware! No cheating!! :-))
 from collections import deque
 from helpers import *
+from assets import *
 
 class Movement:
-    
+
     def __init__(self, board, piece):
         self.board = board
         self.piece = piece
+
+    def make_move(self, move):
+        if '-' in move:
+            self.make_non_capture_move(move)
+        else:
+            self.make_capture_move(move)
 
     def make_non_capture_move(self, move):
         move_positions = move.split('-')
         initial_position = position_parser(move_positions[0])
         final_position = position_parser(move_positions[1])
+        piece = self.board.get_piece(initial_position)
         self.make_simple_move(initial_position, final_position)
+        if final_position in promotion_positions[piece]:
+            self.board.promote(final_position)
 
     def make_capture_move(self, move):
         move_position_list = deque(move.split('x'))
@@ -21,6 +31,9 @@ class Movement:
             final_position = position_parser(move_position_list[1])
             self.make_single_capture_move(initial_position, final_position)
             move_position_list.popleft()
+        piece = self.board.get_piece(final_position)
+        if final_position in promotion_positions[piece]:
+            self.board.promote(final_position)
 
     def make_simple_move(self, initial_position, final_position):
         # Represents a non-capturing move.
@@ -36,9 +49,9 @@ class Movement:
         self.make_simple_move(initial_position, final_position)
         opponent_position = self.get_opponent_position(initial_position, final_position)
         self.board.set_piece(opponent_position, self.piece['empty'])
-        
+
     def get_opponent_position(self, initial_position, final_position):
-        # Find the opponent position (row and column) between initial and final position. 
+        # Find the opponent position (row and column) between initial and final position.
         [initial_row, initial_column] = initial_position
         [final_row, final_column] = final_position
         opponent_row = (initial_row + final_row) / 2

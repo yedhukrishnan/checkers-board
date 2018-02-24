@@ -24,3 +24,11 @@ move_offset = { piece['black']: [1], piece['white']: [-1], piece['black_king']: 
 
 piece_set_one = [piece['white'], piece['white_king']]
 piece_set_two = [piece['black'], piece['black_king']]
+
+promotion_positions = {
+            'b': [[7, 0], [7, 2], [7, 4], [7, 6]],
+            'B': [[7, 0], [7, 2], [7, 4], [7, 6]],
+            'w': [[0, 1], [0, 3], [0, 5], [0, 7]],
+            'W': [[0, 1], [0, 3], [0, 5], [0, 7]],
+        }
+

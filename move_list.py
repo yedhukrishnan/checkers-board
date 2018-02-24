@@ -1,8 +1,8 @@
 from helpers import *
 from assets import *
 
-class MoveList:
-    
+class MoveListGenerator:
+
     def __init__(self, checkers_board, piece):
         self.checkers_board = checkers_board
         self.piece = piece
@@ -32,7 +32,7 @@ class MoveList:
         for offset in move_offset[piece]:
             self.add_neighbour([row + offset, column + 1])
             self.add_neighbour([row + offset, column - 1])
-        
+
         return self.neighbours
 
     def add_neighbour(self, neighbour):
@@ -42,18 +42,23 @@ class MoveList:
     def is_valid(self, position):
         [row, column] = position
         return 0 <= row <= 7 and 0 <= column <= 7
-        
+
     def get_captures(self, move, position, piece):
         [row, column] = position
         capture_neighbours = self.get_capture_neighbour_cells(position, piece)
-        
+
         for neighbour in capture_neighbours:
-            move += "x" + readable_position(neighbour)
-            self.get_captures(move, neighbour, piece)
+            current_position = readable_position(neighbour)
+            if current_position in move:
+                self.capture_move_list.append(move)
+            else:
+                move += "x" + current_position
+                self.get_captures(move, neighbour, piece)
 
         if capture_neighbours == []:
-            self.capture_move_list.append(move)
-                
+            if len(move) != 2:
+                self.capture_move_list.append(move)
+
     def get_capture_neighbour_cells(self, position, piece):
         [row, column] = position
         self.capture_neighbours = []
@@ -61,7 +66,7 @@ class MoveList:
         for offset in move_offset[piece]:
             self.add_capture_neighbour([row, column], [row + offset, column + 1], [row + 2 * offset, column + 2], piece)
             self.add_capture_neighbour([row, column], [row + offset, column - 1], [row + 2 * offset, column - 2], piece)
-        
+
         return self.capture_neighbours
 
     # TODO: Refactoring
@@ -73,4 +78,4 @@ class MoveList:
                     self.capture_neighbours.append(final_position)
 
     def is_opponent(self, piece, opponent_piece):
-        return (piece in piece_set_one and opponent_piece in piece_set_two) or (piece in piece_set_two and opponent_piece in piece_set_one) 
+        return (piece in piece_set_one and opponent_piece in piece_set_two) or (piece in piece_set_two and opponent_piece in piece_set_one)

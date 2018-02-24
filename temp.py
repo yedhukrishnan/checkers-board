@@ -42,7 +42,7 @@ print_board(b.wooden_board)
 #readable_position([0,7])
 #readable_position([7,0])
 
-ml = MoveList(b, piece)
+ml = MoveListGenerator(b, piece)
 
 #print ml.get_move_list('c3')
 #print ml.get_move_list('h6')

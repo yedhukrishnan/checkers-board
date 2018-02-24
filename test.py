@@ -61,4 +61,5 @@
 from game import Game
 
 game = Game()
-game.start()
+# game.start()
+game.start_random()

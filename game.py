@@ -17,12 +17,13 @@ class Game():
         self.players = cycle([piece_set_two, piece_set_one])
 
     def start(self):
-        self.begin_game_loop()
+        return self.begin_game_loop()
 
     def start_random(self):
-        self.begin_game_loop(True)
+        return self.begin_game_loop(True)
 
     def begin_game_loop(self, is_random = False):
+        game_moves = []
         while True:
             current_piece_set = next(self.players)
             print_board(self.board.wooden_board)
@@ -30,10 +31,12 @@ class Game():
             if moves:
                 selected_move = self.select_move(moves, is_random)
                 self.movement.make_move(moves[selected_move])
+                game_moves.append(moves[selected_move])
             else:
                 winner = next(self.players)
                 print winner[0] + " wins"
                 break
+        return game_moves
 
     def select_move(self, moves, is_random):
         if is_random:

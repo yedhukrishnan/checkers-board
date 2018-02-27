@@ -62,4 +62,5 @@ from game import Game
 
 game = Game()
 # game.start()
-game.start_random()
+game_moves = game.start_random()
+print game_moves

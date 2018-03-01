@@ -79,3 +79,22 @@ class MoveListGenerator:
 
     def is_opponent(self, piece, opponent_piece):
         return (piece in piece_set_one and opponent_piece in piece_set_two) or (piece in piece_set_two and opponent_piece in piece_set_one)
+
+    def get_piece_positions_of_current_player(self, piece_set):
+        positions = []
+        for i in range(8):
+            for j in range(8):
+                if self.checkers_board.get_piece([i, j]) in piece_set:
+                    positions.append([i, j])
+        return positions
+
+    def get_moves_for_current_player(self, piece_set):
+        move_list = []
+        positions = self.get_piece_positions_of_current_player(piece_set)
+        for position in positions:
+            move_list.append(self.get_capturing_move_list(readable_position(position)))
+            move_list.append(self.get_move_list(readable_position(position)))
+
+        move_list = [item for sublist in move_list for item in sublist]
+        capturing_move_list = [move for move in move_list if 'x' in move]
+        return capturing_move_list or move_list

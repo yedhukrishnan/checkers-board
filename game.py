@@ -10,10 +10,10 @@ import random
 
 class Game():
     def __init__(self):
-        self.board = CheckersBoard(piece)
+        self.board = CheckersBoard()
         self.board.set_pieces_on_board_for_a_new_game()
-        self.movement = Movement(self.board, piece)
-        self.move_list_generator = MoveListGenerator(self.board, piece)
+        self.movement = Movement()
+        self.move_list_generator = MoveListGenerator()
         self.players = cycle([piece_set_two, piece_set_one])
 
     def start(self):
@@ -27,10 +27,10 @@ class Game():
         while True:
             current_piece_set = next(self.players)
             print_board(self.board.wooden_board)
-            moves = self.move_list_generator.get_moves_for_current_player(current_piece_set)
+            moves = self.move_list_generator.get_moves_for_current_player(self.board.wooden_board, current_piece_set)
             if moves:
                 selected_move = self.select_move(moves, is_random)
-                self.movement.make_move(moves[selected_move])
+                self.board = self.movement.make_move(self.board, moves[selected_move])
                 game_moves.append(moves[selected_move])
             else:
                 winner = next(self.players)

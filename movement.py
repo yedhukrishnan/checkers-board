@@ -5,15 +5,16 @@ from assets import *
 
 class Movement:
 
-    def __init__(self, board, piece):
+    def make_move(self, board, move):
         self.board = board
-        self.piece = piece
+        self.piece = board.piece
 
-    def make_move(self, move):
         if '-' in move:
             self.make_non_capture_move(move)
         else:
             self.make_capture_move(move)
+
+        return self.board
 
     def make_non_capture_move(self, move):
         move_positions = move.split('-')

@@ -1,11 +1,8 @@
 from helpers import *
 from assets import *
+from checkers_board import CheckersBoard
 
 class MoveListGenerator:
-
-    def __init__(self, checkers_board, piece):
-        self.checkers_board = checkers_board
-        self.piece = piece
 
     def get_move_list(self, position):
         movable_neighbours = self.get_movable_neighbour_cells(position_parser(position))
@@ -88,7 +85,11 @@ class MoveListGenerator:
                     positions.append([i, j])
         return positions
 
-    def get_moves_for_current_player(self, piece_set):
+    def get_moves_for_current_player(self, board, piece_set):
+        self.checkers_board = CheckersBoard()
+        self.piece = self.checkers_board.piece
+
+        self.checkers_board.initialize_board(board)
         move_list = []
         positions = self.get_piece_positions_of_current_player(piece_set)
         for position in positions:

@@ -2,7 +2,7 @@ class CheckersBoard:
 
     wooden_board = []
 
-    def __init__(self, piece):
+    def __init__(self):
         self.wooden_board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
                              [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
                              [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -11,7 +11,13 @@ class CheckersBoard:
                              [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
                              [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
                              [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
-        self.piece = piece
+        self.piece = {
+            'black': 'b',
+            'white': 'w',
+            'black_king': 'B',
+            'white_king': 'W',
+            'empty': ' '
+        }
         self.promoted_piece = {
                 'b': 'B',
                 'B': 'B',
@@ -30,6 +36,9 @@ class CheckersBoard:
         self.initial_black_positions = [[2, 1], [2, 3], [2, 5], [2, 7], [1, 0],
                                         [1, 2], [1, 4], [1, 6], [0, 1], [0, 3],
                                         [0, 5], [0, 7]]
+
+    def initialize_board(self, board):
+        self.wooden_board = board
 
     def set_pieces_on_board_for_a_new_game(self):
         self.set_pieces_on_board(self.initial_white_positions, self.piece['white'])

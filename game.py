@@ -27,7 +27,7 @@ class Game():
         while True:
             current_piece_set = next(self.players)
             print_board(self.board.wooden_board)
-            moves = self.move_list_generator.get_moves_for_current_player(self.board.wooden_board, current_piece_set)
+            moves = self.move_list_generator.get_moves_for_player(self.board.wooden_board, current_piece_set)
             if moves:
                 selected_move = self.select_move(moves, is_random)
                 self.board = self.movement.make_move(self.board, moves[selected_move])

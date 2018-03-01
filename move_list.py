@@ -4,6 +4,23 @@ from checkers_board import CheckersBoard
 
 class MoveListGenerator:
 
+    def get_moves_for_player(self, board, piece_set):
+        self.checkers_board = CheckersBoard()
+        self.piece = self.checkers_board.piece
+
+        self.checkers_board.initialize_board(board)
+        move_list = []
+        positions = self.get_piece_positions_of_current_player(piece_set)
+        for position in positions:
+            move_list.append(self.get_capturing_move_list(readable_position(position)))
+            move_list.append(self.get_move_list(readable_position(position)))
+
+        move_list = [item for sublist in move_list for item in sublist]
+        capturing_move_list = [move for move in move_list if 'x' in move]
+        return capturing_move_list or move_list
+
+    # Private Methods
+
     def get_move_list(self, position):
         movable_neighbours = self.get_movable_neighbour_cells(position_parser(position))
         move_list = []
@@ -84,18 +101,3 @@ class MoveListGenerator:
                 if self.checkers_board.get_piece([i, j]) in piece_set:
                     positions.append([i, j])
         return positions
-
-    def get_moves_for_current_player(self, board, piece_set):
-        self.checkers_board = CheckersBoard()
-        self.piece = self.checkers_board.piece
-
-        self.checkers_board.initialize_board(board)
-        move_list = []
-        positions = self.get_piece_positions_of_current_player(piece_set)
-        for position in positions:
-            move_list.append(self.get_capturing_move_list(readable_position(position)))
-            move_list.append(self.get_move_list(readable_position(position)))
-
-        move_list = [item for sublist in move_list for item in sublist]
-        capturing_move_list = [move for move in move_list if 'x' in move]
-        return capturing_move_list or move_list

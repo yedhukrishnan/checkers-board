@@ -5,10 +5,10 @@ from checkers_board import CheckersBoard
 class MoveListGenerator:
 
     def get_moves_for_player(self, board, piece_set):
-        self.checkers_board = CheckersBoard()
+        self.checkers_board = CheckersBoard(board)
         self.piece = self.checkers_board.piece
 
-        self.checkers_board.initialize_board(board)
+        # self.checkers_board.initialize_board(board)
         move_list = []
         positions = self.get_piece_positions_of_current_player(piece_set)
         for position in positions:
